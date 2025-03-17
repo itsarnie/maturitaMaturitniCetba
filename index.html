@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Kontrola maturitní četby</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Kontrola maturitní četby</h1>
+      <div class="user-info">
+        <label for="userName">Jméno:</label>
+        <input type="text" id="userName" placeholder="Zadejte své jméno" />
+      
+        <label for="userClass">Třída:</label>
+        <input type="text" id="userClass" placeholder="Zadejte svou třídu" />
+      </div>
+      <div class="rules">
+        <h2>Pravidla výběru knih</h2>
+        <div id="validationResults"></div>
+      </div>
+      <div id="customNotification" class="notification hidden">
+        <span id="notificationMessage">Toto je notifikace</span>
+        <button onclick="hideNotification()">✖</button>
+      </div>
+      <div class="book-selection">
+        <div id="data">
+        <div id="availableBooksSearch">
+          <h3>Seznam dostupných knih</h3>
+          <input
+            type="text"
+            class="search-box"
+            id="searchBox"
+            placeholder="Vyhledat knihu..."
+          />
+          <div class="book-list" id="availableBooks"></div>
+        </div>
+        <div id=" ">
+          <h3>Vybrané knihy (<span id="selectedCount">0</span>/20)</h3>
+          <div class="selected-books" id="selectedBooks"></div>
+        </div>
+      </div>
+        <button onclick="generatePDF()" class="export-button">
+          Stáhnout seznam (PDF)
+        </button>
+      </div>
+    </div>
+
+    <footer>
+      © 2024 <span>Matěj Ričl</span>,
+      <span>Střední průmyslová škola a Vyšší odborná škola Kladno</span>
+      | <a href="https://github.com/itsarnie/MaturitniCetba" target="_blank">GitHub</a>
+    </footer>
+
+    <script src="node_modules/pdfmake/build/pdfmake.min.js"></script>
+    <script src="node_modules/pdfmake/build/vfs_fonts.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

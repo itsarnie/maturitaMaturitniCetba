@@ -1,0 +1,411 @@
+body {
+  font-family: "Roboto", sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background: linear-gradient(120deg, #f0f0f0, #ffffff);
+}
+
+.container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative; /* Umístění pro vnořená absolutní tlačítka */
+}
+
+.container:hover {
+  transform: translateY(-5px);
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Montserrat", sans-serif;
+}
+h1 {
+  font-size: 2rem;
+  color: #007bff;
+  text-align: center;
+}
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+h3 {
+  font-size: 1.3rem;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+.rules,
+.book-list,
+.selected-books {
+  background-color: #f9fafb;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive layout */
+.book-selection {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+#availableBooksSearch {
+  display: flex;
+  flex-direction: column;
+}
+
+#data {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Two-column layout for larger screens */
+@media (min-width: 768px) {
+  .book-selection {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.book-list {
+  height: 300px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+}
+
+.selected-books {
+  overflow-y: auto;
+  border: 1px solid #ddd;
+}
+
+#selectedBooks {
+  height: auto; /* Výška bude řízena JavaScriptem */
+  overflow-y: auto; /* Umožní rolování uvnitř pevné výšky */
+  border: 1px solid #ddd;
+}
+
+#selected-books-container {
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.book-item {
+  display: flex;
+  justify-content: space-between; /* Zajistí, že rok bude na pravé straně */
+  align-items: center; /* Zarovná prvky vertikálně */
+  padding: 10px;
+  margin: 6px 0;
+  border-radius: 8px;
+  background-color: #ffffff;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.book-main-content {
+  flex-grow: 1; /* Hlavní obsah zabere zbývající prostor */
+}
+
+.book-year {
+  font-size: 0.9em;
+  color: #666; /* Neutrální barva textu */
+  text-align: right;
+  min-width: 50px; /* Zajistí dostatečný prostor pro rok */
+}
+
+.book-item:hover {
+  background-color: #e9f0ff;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
+}
+.genre-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8em;
+}
+.genre-proza {
+  background-color: #e3f2fd;
+  color: #007bff;
+}
+.genre-poezie {
+  background-color: #f3e5f5;
+  color: #9c27b0;
+}
+.genre-drama {
+  background-color: #e8f5e9;
+  color: #4caf50;
+}
+.validation-item {
+  padding: 10px;
+  margin: 6px 0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.validation-item.valid {
+  background-color: #d4edda;
+  color: #155724;
+}
+.validation-item.invalid {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+.count-badge {
+  background-color: #007bff;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8em;
+}
+.search-box {
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  transition: box-shadow 0.3s ease;
+}
+.search-box:focus {
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+footer {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #888;
+}
+footer span {
+  font-weight: bold;
+  color: #333;
+}
+
+footer a {
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+
+footer a:hover {
+  color: #0056b3;
+  background-color: rgba(0, 123, 255, 0.1);
+}
+
+.export-button {
+  margin-top: 20px;
+  padding: 8px 16px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  grid-row: 3/4;
+}
+
+.export-button:hover {
+  background-color: #45a049;
+}
+
+.dark-mode-toggle {
+  position: absolute; /* Pozice uvnitř kontejneru */
+  top: 20px; /* Umístění tlačítka uvnitř kontejneru */
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease, transform 0.5s ease;
+}
+
+.dark-mode-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Dark mode styles */
+body.dark-mode {
+  background: linear-gradient(120deg, #1a1a1a, #2d2d2d);
+  color: #ffffff;
+}
+
+.dark-mode .container {
+  background-color: #333333;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode h1 {
+  color: #66b3ff;
+}
+
+.dark-mode h3 {
+  color: #66b3ff;
+}
+
+.dark-mode .rules,
+.dark-mode .book-list,
+.dark-mode .selected-books {
+  background-color: #2d2d2d;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .book-item {
+  background-color: #404040;
+  color: #ffffff;
+}
+
+.dark-mode .book-item:hover {
+  background-color: #4d4d4d;
+  box-shadow: 0 2px 8px rgba(102, 179, 255, 0.2);
+}
+
+.dark-mode .genre-proza {
+  background-color: #1a365d;
+  color: #66b3ff;
+}
+
+.dark-mode .genre-poezie {
+  background-color: #4a235a;
+  color: #e1bee7;
+}
+
+.dark-mode .genre-drama {
+  background-color: #1b4d2e;
+  color: #81c784;
+}
+
+.dark-mode .validation-item.valid {
+  background-color: #1b4d2e;
+  color: #81c784;
+}
+
+.dark-mode .validation-item.invalid {
+  background-color: #4d1f23;
+  color: #ef9a9a;
+}
+
+.dark-mode .search-box {
+  background-color: #404040;
+  border-color: #666666;
+  color: #ffffff;
+}
+
+.dark-mode .search-box:focus {
+  box-shadow: 0 0 5px rgba(102, 179, 255, 0.5);
+}
+
+.dark-mode footer {
+  color: #888888;
+}
+
+.dark-mode footer span {
+  color: #cccccc;
+}
+
+.dark-mode .export-button {
+  background-color: #2e7d32;
+}
+
+.dark-mode .export-button:hover {
+  background-color: #388e3c;
+}
+
+.dark-mode footer a {
+  color: #66b3ff;
+}
+
+.dark-mode footer a:hover {
+  color: #99ccff;
+  background-color: rgba(102, 179, 255, 0.1);
+}
+
+/* Styl pro custom notifikaci */
+.notification {
+  position: fixed; /* Umístí notifikaci pevně vůči oknu */
+  bottom: 50px; /* Odsadí ji od spodního okraje obrazovky */
+  left: 50%; /* Horizontálně zarovná na střed */
+  transform: translateX(-50%); /* Středové zarovnání */
+  background-color: #333;
+  color: #fff;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1000; /* Zajistí, že bude nad ostatními prvky */
+}
+
+/* Viditelná notifikace */
+.notification.visible {
+  opacity: 1;
+}
+
+/* Skrytá notifikace */
+.notification.hidden {
+  opacity: 0;
+}
+
+.notification button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+/* Styl pro světlý režim */
+.user-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f9fafb; /* Světlé pozadí */
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Jemný stín */
+}
+
+.user-info label {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.user-info input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  background-color: #fff; /* Bílé pozadí */
+  color: #333; /* Tmavý text */
+}
+
+.user-info input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  outline: none;
+}
+
+/* Styl pro tmavý režim */
+body.dark-mode .user-info {
+  background-color: #2d2d2d; /* Tmavé pozadí */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Jemný stín */
+}
+
+body.dark-mode .user-info input {
+  background-color: #404040; /* Tmavší pozadí pro pole */
+  border-color: #666666;
+  color: #fff; /* Světlý text */
+}
+
+body.dark-mode .user-info input:focus {
+  border-color: #66b3ff; /* Světle modrý obrys */
+  box-shadow: 0 0 5px rgba(102, 179, 255, 0.5);
+}
