@@ -3,6 +3,7 @@ let selectedBooks = [];
 let availableBooks = [];
 let removedBooks = [];
 let knownAutors = [];
+let filteredBooks = [];
 
 // Ukládá knihy do localStorage - uloží si je do paměti prohližeče
 const savedSelectedBooks = localStorage.getItem('selectedBooks');
@@ -16,6 +17,7 @@ fetch('data.json')
   .then((data) => {
     books = data;
     availableBooks = [...books];
+    filteredBooks = [...books];
     availableBooks.sort((a, b) => {
       const authorComparison = a.author.localeCompare(b.author);
       if (authorComparison !== 0) {
@@ -485,6 +487,33 @@ document.getElementById('searchBox').addEventListener('input', (e) => {
   availableBooks = filteredBooks;
   updateBookLists();
 });
+
+// Přidá event listenery pro filtry
+document.addEventListener('DOMContentLoaded', () => {
+  const periodFilter = document.getElementById('periodFilter');
+  const isCzechFilter = document.getElementById('isCzechFilter');
+
+  periodFilter.addEventListener('change', applyFilters);
+  isCzechFilter.addEventListener('change', applyFilters);
+});
+
+// Aplikuje filtry na seznam knih
+function applyFilters() {
+  const periodValue = document.getElementById('periodFilter').value;
+  const isCzechValue = document.getElementById('isCzechFilter').value;
+
+  filteredBooks = books.filter(book => {
+    const periodMatch = !periodValue || book.period === periodValue;
+    const isCzechMatch = !isCzechValue || book.isCzech.toString() === isCzechValue;
+    return periodMatch && isCzechMatch;
+  });
+
+  availableBooks = filteredBooks.filter(book => 
+    !selectedBooks.some(selected => selected.title === book.title)
+  );
+
+  updateBookLists();
+}
 
 // Aktualizuje seznamy knih
 updateBookLists();

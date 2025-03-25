@@ -28,13 +28,26 @@
         <div id="data">
         <div id="availableBooksSearch">
           <h3>Seznam dostupných knih</h3>
+          <div class="book-list" id="availableBooks"></div>
+          <div class="filters">
+            <select id="periodFilter" class="filter-select">
+              <option value="">Všechna období</option>
+              <option value="18">do 18. století</option>
+              <option value="19">19. století</option>
+              <option value="20">20. a 21. století</option>
+            </select>
+            <select id="isCzechFilter" class="filter-select">
+              <option value="">Všechny knihy</option>
+              <option value="true">Česká literatura</option>
+              <option value="false">Světová literatura</option>
+            </select>
+          </div>
           <input
             type="text"
             class="search-box"
             id="searchBox"
             placeholder="Vyhledat knihu..."
           />
-          <div class="book-list" id="availableBooks"></div>
         </div>
         <div id=" ">
           <h3>Vybrané knihy (<span id="selectedCount">0</span>/20)</h3>
@@ -53,8 +66,8 @@
       | <a href="https://github.com/itsarnie/MaturitniCetba" target="_blank">GitHub</a>
     </footer>
 
-    <script src="node_modules/pdfmake/build/pdfmake.min.js"></script>
-    <script src="node_modules/pdfmake/build/vfs_fonts.js"></script>
+    <script src="js/pdfmake.min.js"></script>
+    <script src="js/vfs_fonts.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>
