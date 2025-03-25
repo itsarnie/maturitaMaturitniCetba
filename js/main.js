@@ -206,6 +206,8 @@ function generatePDF() {
     document.getElementById('userName').value || 'Nezadané jméno';
   const userClass =
     document.getElementById('userClass').value || 'Nezadaná třída';
+  const teacherName =
+    document.getElementById('teacherName').value || 'Nezadaný vyučující';
 
   
   const fileName = `${userClass}_${userName}_maturitni_cetba.pdf`.replace(
@@ -271,7 +273,7 @@ function generatePDF() {
           {
             columns: [
               {
-                text: `Datum vytvoření: ${new Date().toLocaleDateString('cs-CZ')}\nVyučující:\nPředeseda předmětové komise: Mgr. et. Mgr. Martin Jíša\nŘeditel školy: Ing. Miroslav Dundr`,
+                text: `Datum vytvoření: ${new Date().toLocaleDateString('cs-CZ')}\nVyučující: ${teacherName}\nPředeseda předmětové komise: Mgr. et. Mgr. Martin Jíša\nŘeditel školy: Ing. Miroslav Dundr`,
                 alignment: 'left',
                 lineHeight: 1.5,
                 fontSize: 10,
